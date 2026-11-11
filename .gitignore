@@ -1,0 +1,6 @@
+macos/pmcdump/PMCDump.kext/Contents/MacOS/
+macos/results/
+linux/results/
+*.o
+.DS_Store
+__pycache__/
