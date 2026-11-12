@@ -57,7 +57,6 @@ The macOS scripts and `linux/gpu-regs.sh` write to `macos/results/` and `linux/r
 On a Core 7 240H, macOS idle (cores individually as deep as on Linux):
 - **Timer coalescing:** widening the windows took the package from 3.0 W to 2.3 W.
 - **Ethernet:** a linked I219-V caps the package at PC3. Linux doesn't have this.
-- **Bluetooth with BTLEAdvFixup:** caps the package at PC3, costing ~2 W.
 - **Display buffer (DDB):** watermark levels are the same as Linux, but Apple's TGL framebuffer gives the display plane a ~4× smaller buffer than i915 (984 vs 4054 blocks).
 - **SMCProcessor:** no measurable effect.
 
