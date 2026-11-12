@@ -45,6 +45,7 @@ Neither change persists across a reboot.
 | `macos/pmcdump/wake-trace.sh` + `wake-attrib.py` | sudo | Timer callouts per second by function and CPU, plus the kernel threads running kext code |
 | `macos/pmcdump/coalesce-ab.sh` | sudo, PMCDump | Interleaved A/B/C test of timer-coalescing windows |
 | `macos/pmcdump/powerctl-ab.sh` | sudo, PMCDump | Interleaved A/B/C test of POWER_CTL bits 19/20 |
+| `macos/btidle/` | OpenCore | Kext + IntelBluetoothFirmware patch that let an Intel USB Bluetooth controller idle-suspend. Saves ~1.6 W idle here with Bluetooth on; see its README. |
 | `macos/timer-coalesce/` | sudo | LaunchDaemon that applies wider timer-coalescing windows at boot. It saved ~0.7 W idle here; see its README. |
 | `linux/gpu-regs.sh` | sudo | The same display registers as PMCDump, read through `resource0`, plus i915 debugfs (WM latencies, DDB, DMC, SAGV) |
 | `linux/power-check.sh` | sudo | turbostat package power and C-states, plus `pmc_core` views, for the Linux side of the comparison |
@@ -58,6 +59,7 @@ On a Core 7 240H, macOS idle (cores individually as deep as on Linux):
 - **Timer coalescing:** widening the windows took the package from 3.0 W to 2.3 W.
 - **Ethernet:** a linked I219-V caps the package at PC3. Linux doesn't have this.
 - **Display buffer (DDB):** watermark levels are the same as Linux, but Apple's TGL framebuffer gives the display plane a ~4× smaller buffer than i915 (984 vs 4054 blocks).
+- **Bluetooth:** the Intel USB Bluetooth controller never idle-suspended while Bluetooth was on, which capped the package at PC3. BTIdle fixes it (4.8 W → 3.2 W).
 - **SMCProcessor:** no measurable effect.
 
 Details are in the issue thread.

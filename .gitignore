@@ -4,3 +4,4 @@ linux/results/
 *.o
 .DS_Store
 __pycache__/
+macos/btidle/BTIdle.kext/Contents/MacOS/

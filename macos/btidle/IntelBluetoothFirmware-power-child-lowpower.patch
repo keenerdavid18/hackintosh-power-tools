@@ -1,0 +1,15 @@
+diff --git a/IntelBluetoothFirmware/IntelBluetoothFirmware.cpp b/IntelBluetoothFirmware/IntelBluetoothFirmware.cpp
+index 675ec76..9d1d7a4 100644
+--- a/IntelBluetoothFirmware/IntelBluetoothFirmware.cpp
++++ b/IntelBluetoothFirmware/IntelBluetoothFirmware.cpp
+@@ -34,7 +34,9 @@ enum { kMyOffPowerState = 0, kMyOnPowerState = 1 };
+ static IOPMPowerState myTwoStates[2] =
+ {
+     {1, kIOPMPowerOff, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+-    {1, kIOPMPowerOn, kIOPMPowerOn, kIOPMPowerOn, 0, 0, 0, 0, 0, 0, 0, 0}
++    // inputPowerRequirement kIOPMLowPower (was kIOPMPowerOn): a power child needing kIOPMPowerOn disables
++    // IOUSBHostDevice idle suspend (IOUSBHostFamily.h), keeping the controller awake and the package at PC3.
++    {1, kIOPMPowerOn, kIOPMPowerOn, kIOPMLowPower, 0, 0, 0, 0, 0, 0, 0, 0}
+ };
+ 
+ bool IntelBluetoothFirmware::init(OSDictionary *dictionary)
